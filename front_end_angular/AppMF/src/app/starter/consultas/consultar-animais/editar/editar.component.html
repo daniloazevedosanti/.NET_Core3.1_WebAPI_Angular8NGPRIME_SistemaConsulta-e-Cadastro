@@ -1,0 +1,21 @@
+<h5>Editar </h5>
+<hr>
+  <h6>Id: {{id}}</h6> 
+  <h6>Descricao: {{descricao}}</h6>
+  <hr>
+<form [formGroup]="f" novalidate>
+    <div class="form-group">
+      <label for="inputNome">Descrição</label>
+      <input type="text" formControlName="descricao" class="form-control" id="inputNome"
+      [(ngModel)]="descricao">
+    </div>
+    <div class="form-group">
+        <label for="inputpreco">Preço</label>
+        <input type="text" formControlName="preco" class="form-control" id="inputpreco"
+        [(ngModel)]="preco">
+      </div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Atualizar</button>
+    <button type="submit" class="btn btn-warning" (click)="voltar()">Cancelar</button>
+  </form>
+
+  <h3>{{msg}}</h3>

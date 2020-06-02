@@ -1,0 +1,9 @@
+C:\Users\Dan\source\repos\mf_test\Domain\bin\Debug\netcoreapp3.1\Domain.deps.json
+C:\Users\Dan\source\repos\mf_test\Domain\bin\Debug\netcoreapp3.1\Domain.dll
+C:\Users\Dan\source\repos\mf_test\Domain\bin\Debug\netcoreapp3.1\Domain.pdb
+C:\Users\Dan\source\repos\mf_test\Domain\obj\Debug\netcoreapp3.1\Domain.csprojAssemblyReference.cache
+C:\Users\Dan\source\repos\mf_test\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfoInputs.cache
+C:\Users\Dan\source\repos\mf_test\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfo.cs
+C:\Users\Dan\source\repos\mf_test\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Dan\source\repos\mf_test\Domain\obj\Debug\netcoreapp3.1\Domain.dll
+C:\Users\Dan\source\repos\mf_test\Domain\obj\Debug\netcoreapp3.1\Domain.pdb

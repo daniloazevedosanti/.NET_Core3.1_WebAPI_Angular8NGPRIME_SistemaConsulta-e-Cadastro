@@ -1,0 +1,16 @@
+<h5>Editar </h5>
+<hr>
+  <h6>  Id: {{id}}</h6> 
+  <h6>Pecuarista: {{nome}}</h6>
+  <hr>
+<form [formGroup]="f" novalidate>
+    <div class="form-group">
+      <label for="inputNome">Nome</label>
+      <input type="text" formControlName="nome" class="form-control" id="inputNome"
+      [(ngModel)]="nome">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Atualizar</button>
+    <button type="submit" class="btn btn-warning" (click)="voltar()">Cancelar</button>
+  </form>
+
+  <h3>{{msg}}</h3>

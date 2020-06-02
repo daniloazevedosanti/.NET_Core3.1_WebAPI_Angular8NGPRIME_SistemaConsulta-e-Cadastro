@@ -1,0 +1,122 @@
+<hr>
+<h4>Cadastro de Compra de gado</h4>
+<hr>
+<button class="btn btn-dark" (click)="reload()">Realizar nova compra</button>
+<hr>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputPecuarista">Pecuarista</label>
+      <select id="inputPecuarista" class="form-control" (change)="onChangePecuarista()">
+        <option selected>Escolha...</option>
+        <option #option *ngFor="let item of pecuaristas" value="{{item.id}}">{{item.nome}}</option>
+      </select>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="inputCity">Data de Entrega</label>
+      <input type="date" class="form-control" id="inputCity" name="data" 
+      [value]="data | date: 'yyyy-MM-dd'"
+      (change)="onChangeDate()">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Id</label>
+      <input type="email" class="form-control" id="inputIdP" 
+      [(ngModel)]="pecuaristaId" name="pecuaristaId" disabled>
+    </div>
+  </div>
+  <hr>
+  <h4>Total: {{total | currency: 'BRL'}}</h4>
+  <hr>
+  <button type="submit" class="btn btn-primary" 
+  (click)="onSubmit()" [disabled]="!onValid()">Comprar</button>
+  <button type="submit" class="btn btn-success" 
+  (click)="onFinalizar()" [hidden]="path">Finalizar Compra/Imprimir</button>
+  <hr>
+  <p-panel header="Animais">
+
+    <button type="submit" class="btn btn btn-outline-dark" data-toggle="modal" data-target="#modal-add">Adicionar</button>
+
+    <p-table [columns]="cols" [value]="novatabela" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+      [responsive]="true" currentPageReportTemplate="Mostrar {first} à {last} de {totalRecords} registros">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{col.header}}
+          </th>
+          <th>Excluir</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{rowData[col.field]}}
+          </td>
+          <td>
+            <button 
+            (click)="popElementoCompra(rowData['id'],rowData['animal'],
+            rowData['quantidade'], rowData['preco'], rowData['total'])"
+            [disabled]="!path">
+              <i class="pi pi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+  <br>
+</form>
+
+<div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar Animal a Compra </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputId1">Id</label>
+          <input type="text" class="form-control" id="inputId1" [(ngModel)]="animalId" disabled>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <label for="inputAnimal">Animal</label>
+            <select id="inputAnimal" class="form-control" (change)="onChangeAnimal()">
+              <option selected>Escolha...</option>
+              <option #option *ngFor="let item of animais" value="{{item.id}}">{{item.descricao}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputDesc">Preço</label>
+            <input type="hidden" class="form-control" id="inputDesc" name="animalDescricao"
+              [(ngModel)]="animalDescricao" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputPreco1">Preço</label>
+            <input type="text" class="form-control" id="inputPreco1" name="animalPreco" [(ngModel)]="animalPreco"
+              disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputQuantidade">Quantidade</label>
+            <input type="text" class="form-control" [(ngModel)]="quantidade" name="quantidade" id="inputQuantidade">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary" [disabled]="!onQuantidade()"
+              (click)="addElementoCompra(animalId,animalDescricao, quantidade, animalPreco)">Adicionar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

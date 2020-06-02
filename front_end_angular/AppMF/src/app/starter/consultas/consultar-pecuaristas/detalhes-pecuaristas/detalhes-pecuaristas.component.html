@@ -1,0 +1,28 @@
+<h3>Detalhes</h3><br>
+<p-panel header="Pecuarista: {{nome}} | Id: {{id}}">
+
+    <h4>Itens Compras realizadas:</h4><br>
+    <p-table [columns]="cols" [value]="tabelaView" [paginator]="true" [rows]="10" 
+    [showCurrentPageReport]="true" [responsive]="true"
+        currentPageReportTemplate="Mostrar {first} à {last} de {totalRecords} registros">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-panel>
+<br>
+<h4 class="float-right"><a routerLink="/consulta_pecuaristas">Voltar</a></h4>

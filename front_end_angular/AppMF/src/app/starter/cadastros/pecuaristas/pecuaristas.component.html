@@ -1,0 +1,13 @@
+<h5>Cadastro </h5>
+<hr>
+  
+<form [formGroup]="f" novalidate>
+    <div class="form-group">
+      <label for="inputNome">Nome</label>
+      <input type="text" formControlName="nome" class="form-control" id="inputNome">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Cadastrar</button>
+    <button type="submit" class="btn btn-warning" (click)="voltar()">Cancelar</button>
+  </form>
+
+  <h3>{{msg}}</h3>

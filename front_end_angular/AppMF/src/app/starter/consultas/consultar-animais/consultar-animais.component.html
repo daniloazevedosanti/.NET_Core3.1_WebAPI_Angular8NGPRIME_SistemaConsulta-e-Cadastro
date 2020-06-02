@@ -1,0 +1,43 @@
+<hr>
+<button class="btn btn-dark" routerLink="/cadastro_animais">Criar Novo Registro</button>
+<button class="btn btn-outline-primary float-right" (click)="reload()">
+<i class="pi pi-refresh" style="font-size: 1em"></i></button>
+<hr>
+<p-panel header="Consulta de Animais Cadastrados">
+    <p-table [columns]="cols" [value]="animais" [paginator]="true" [rows]="10" 
+    [showCurrentPageReport]="true" [lazy]="true"
+    [responsive]="true" currentPageReportTemplate="Mostrar {first} à {last} de {totalRecords} registros">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+                <td>
+                    <button class="btn btn-outline-warning"
+                    [routerLink]="['/consulta_animais/edit', rowData['id']]">
+                        <i class="pi pi-pencil"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger" 
+                    [disabled]="onContemItens(rowData['id'])"
+                    [routerLink]="['/consulta_animais/delete', rowData['id']]">
+                    <i class="pi pi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>
+
+

@@ -1,0 +1,90 @@
+<hr>
+<button class="btn btn-dark" routerLink="/cadastro_compras">Realizar nova compra</button>
+<button class="btn btn-outline-primary float-right" (click)="reload()">
+<i class="pi pi-refresh" style="font-size: 1em"></i></button>
+<hr>
+<p-panel header="Consulta de compra de gado">
+    <hr>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="inputId">Id</label>
+            <input type="text" class="form-control" id="inputId" [(ngModel)]="pecuaristaId" name="pecuaristaId"
+                disabled>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="inputPecuarista">Pecuarista</label>
+            <select id="inputPecuarista" class="form-control" (change)="onChangePecuarista()">
+                <option selected>Escolha...</option>
+                <option #option *ngFor="let item of pecuaristas" value="{{item.id}}">{{item.nome}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <p for="labelData">Data de entrega</p>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="inputData1">De:</label>
+            <input type="date" class="form-control" id="inputData1" 
+            [value]="dataini | date: 'yyyy-MM-dd'"
+            [(ngModel)]="dataini" name="dataini">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputData2">Até:</label>
+            <input type="date" class="form-control" id="inputData2" 
+            [value]="datafim | date: 'yyyy-MM-dd'" [(ngModel)]="datafim" name="datafim">
+        </div>
+    </div>
+    <hr>
+    <button pButton type="button" label="Pesquisar" class="mb-2 ui-button-success"
+     (click)="pesquisa()"></button>
+</p-panel>
+<br>
+
+<div *ngIf="msgErro != ''" class="alert alert-warning" role="alert">
+    {{msgErro}}
+</div>
+
+<p-table [columns]="cols" [value]="tabela" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    [responsive]="true" currentPageReportTemplate="Mostrar {first} à {last} de {totalRecords} registros">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th>Finalizar/Print</th>
+            <th>Detalhes/Edição</th>
+            <th>Excluir</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+            <td>
+                <button class="btn btn-outline-primary"
+                (click)="onFinalizarOrImprimir(rowData['Id'])">
+                <i class="pi pi-print"></i></button>
+            </td>
+
+            <td>
+                <button class="btn btn-outline-secondary" 
+                [routerLink]="['/consulta_compras/details',rowData['Id']]">
+                    <i class="pi pi-user-edit"></i></button>
+            </td>
+            <td>
+                <button class="btn btn-outline-danger"
+                [routerLink]="['/consulta_compras/details',rowData['Id']]"
+                [disabled]="onComprasConcretizadas(rowData['Id'])">
+                    <i class="pi pi-trash"></i></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
